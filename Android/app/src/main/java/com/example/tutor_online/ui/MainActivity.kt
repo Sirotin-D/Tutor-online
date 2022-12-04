@@ -1,7 +1,8 @@
-package com.example.tutor_online
+package com.example.tutor_online.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.example.tutor_online.R
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
