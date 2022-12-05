@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Tutor-online</string>
+    <string name="auth_title_text_view">Авторизация</string>
+    <string name="user_enter_name_hint">введите логин</string>
+    <string name="user_enter_password_edit_text">введите пароль</string>
+    <string name="user_sign_in_button_text">Войти</string>
 </resources>
