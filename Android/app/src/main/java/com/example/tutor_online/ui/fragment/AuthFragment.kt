@@ -11,7 +11,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.tutor_online.databinding.FragmentAuthBinding
 import com.example.tutor_online.ui.activity.MainActivity
 import com.example.tutor_online.viewmodel.AuthViewModel
-import datamodel.viewdatamodel.AuthViewDataModel
+import com.example.tutor_online.datamodel.viewDataModel.AuthViewDataModel
 
 class AuthFragment: Fragment() {
 
@@ -47,17 +47,14 @@ class AuthFragment: Fragment() {
             authDisplayLiveData.observe(viewLifecycleOwner) {
                 when (it) {
                     AuthViewDataModel.INITIAL_STATE -> {
-                        binding.authProgressBar.visibility = View.VISIBLE
+                        binding.authProgressBar.visibility = View.GONE
+                        binding.authErrorTextView.visibility = View.GONE
                     }
                     AuthViewDataModel.SHOW_LOADING -> {
                         binding.authProgressBar.visibility = View.VISIBLE
                     }
                     AuthViewDataModel.HIDE_LOADING -> {
-                        binding.authProgressBar.visibility = View.VISIBLE
-                    }
-                    AuthViewDataModel.SHOW_SIGN_IN -> {
                         binding.authProgressBar.visibility = View.GONE
-                        binding.authErrorTextView.visibility = View.GONE
                     }
                     AuthViewDataModel.SHOW_ERROR -> {
                         binding.authProgressBar.visibility = View.GONE
@@ -65,10 +62,20 @@ class AuthFragment: Fragment() {
                     }
                     AuthViewDataModel.OPEN_MAIN_MENU -> {
                         val mainMenuIntent = Intent(context, MainActivity::class.java)
+                        val user = it.user
+                        val sharedPreferences = context?.getSharedPreferences("Auth", Context.MODE_PRIVATE)
+                        val sharedEditor = sharedPreferences?.edit()
+                        sharedEditor?.putString("userType", user?.userType.toString())
+                        sharedEditor?.putString("userName", user?.name)
+                        sharedEditor?.putString("userAge", user?.age)
+                        sharedEditor?.putString("userDescription", user?.description)
+                        sharedEditor?.apply()
                         startActivity(mainMenuIntent)
                     }
+                    else -> {}
                 }
             }
+            viewOpened()
         }
     }
 

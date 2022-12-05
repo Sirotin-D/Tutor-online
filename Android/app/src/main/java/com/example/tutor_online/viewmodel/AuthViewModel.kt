@@ -1,11 +1,11 @@
 package com.example.tutor_online.viewmodel
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.tutor_online.ui.fragment.IAuthView
-import datamodel.viewdatamodel.AuthViewDataModel
+import com.example.tutor_online.datamodel.viewDataModel.AuthViewDataModel
+import com.example.tutor_online.service.RequestService
 
 class AuthViewModel(): ViewModel(), IAuthView {
 
@@ -21,22 +21,25 @@ class AuthViewModel(): ViewModel(), IAuthView {
         _authDisplayLiveData.postValue(AuthViewDataModel.HIDE_LOADING)
     }
 
-    override fun showSignIn() {
-        _authDisplayLiveData.postValue(AuthViewDataModel.SHOW_SIGN_IN)
-    }
-
     override fun showError(errorId: Int) {
         val authDisplayType = AuthViewDataModel.SHOW_ERROR
         authDisplayType.resourceId = errorId
         _authDisplayLiveData.postValue(authDisplayType)
     }
 
+    fun viewOpened() {
+        _authDisplayLiveData.postValue(AuthViewDataModel.INITIAL_STATE)
+    }
+
     fun handleClickingOnSignIn(login: String, password: String) {
         showLoading()
-        if ((login.isBlank()) && (password.isBlank())) {
+        if ((login.isBlank()) || (password.isBlank())) {
+            hideLoading()
             return
         }
-        Log.d("Dmitry", "Login: $login, password: $password")
-        _authDisplayLiveData.postValue(AuthViewDataModel.OPEN_MAIN_MENU)
+        val user = RequestService().getData(Pair(login, password))
+        val userState = AuthViewDataModel.OPEN_MAIN_MENU
+        userState.user = user
+        _authDisplayLiveData.postValue(userState)
     }
 }

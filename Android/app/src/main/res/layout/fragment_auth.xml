@@ -8,27 +8,16 @@
     tools:context=".ui.fragment.AuthFragment">
 
     <TextView
-        android:id="@+id/app_name_text_view"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="54dp"
-        android:text="@string/app_name"
-        android:textAppearance="@style/TextAppearance.AppCompat.Large"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
         android:id="@+id/auth_title_text_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="108dp"
         android:text="@string/auth_title_text_view"
-        android:textStyle="bold"
+        android:layout_marginTop="108dp"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/app_name_text_view" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/auth_login_edit_text"
@@ -41,7 +30,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/auth_title_text_view"
-        android:autofillHints="" />
+        android:autofillHints=""
+        android:inputType="textEmailAddress"/>
 
     <EditText
         android:id="@+id/auth_password_edit_text"
@@ -54,7 +44,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/auth_login_edit_text"
-        android:autofillHints="" />
+        android:autofillHints=""
+        android:inputType="textPassword" />
 
     <Button
         android:id="@+id/sign_in_button"
