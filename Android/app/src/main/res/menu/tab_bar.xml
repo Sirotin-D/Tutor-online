@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/my_profile_navigation_graph"
+        android:icon="@drawable/ic_user"
+        android:title="Профиль" />
+
+    <item
+        android:id="@+id/advertisement_list_graph"
+        android:icon="@drawable/ic_users"
+        android:title="Список" />
+
+    <item
+        android:id="@+id/direct_advertisement_graph"
+        android:icon="@drawable/ic_description"
+        android:title="Заявки" />
+</menu>
