@@ -3,15 +3,15 @@
     <item
         android:id="@+id/my_profile_navigation_graph"
         android:icon="@drawable/ic_user"
-        android:title="Профиль" />
+        android:title="@string/my_profile" />
 
     <item
         android:id="@+id/advertisement_list_graph"
         android:icon="@drawable/ic_users"
-        android:title="Список" />
+        android:title="@string/lessons_list" />
 
     <item
         android:id="@+id/direct_advertisement_graph"
         android:icon="@drawable/ic_description"
-        android:title="Заявки" />
+        android:title="@string/my_lessons" />
 </menu>
