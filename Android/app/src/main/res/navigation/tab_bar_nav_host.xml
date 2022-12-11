@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/tab_bar_nav_host"
+    app:startDestination="@+id/my_profile_fragment">
+
+    <fragment
+        android:id="@+id/my_profile_fragment"
+        android:name="com.example.tutor_online.ui.fragment.MyProfileFragment"
+        android:label="@string/my_profile"
+        tools:layout="@layout/fragment_my_profile" />
+    <fragment
+        android:id="@+id/lessons_list_fragment"
+        android:name="com.example.tutor_online.ui.fragment.LessonListFragment"
+        android:label="@string/lessons_list"
+        tools:layout="@layout/lessons_list_fragment" />
+    <fragment
+        android:id="@+id/my_lessons_list_fragment"
+        android:name="com.example.tutor_online.ui.fragment.MyLessonsListFragment"
+        android:label="@string/my_lessons"
+        tools:layout="@layout/my_lessons_list_fragment" />
+</navigation>

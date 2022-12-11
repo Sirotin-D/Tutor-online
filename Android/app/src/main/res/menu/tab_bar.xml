@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:id="@+id/my_profile_navigation_graph"
+        android:id="@+id/my_profile_fragment"
         android:icon="@drawable/ic_user"
         android:title="@string/my_profile" />
 
     <item
-        android:id="@+id/advertisement_list_graph"
-        android:icon="@drawable/ic_users"
+        android:id="@+id/lessons_list_fragment"
+        android:icon="@drawable/ic_lessons_list"
         android:title="@string/lessons_list" />
 
     <item
-        android:id="@+id/direct_advertisement_graph"
-        android:icon="@drawable/ic_description"
+        android:id="@+id/my_lessons_list_fragment"
+        android:icon="@drawable/ic_my_lessons_list"
         android:title="@string/my_lessons" />
 </menu>
