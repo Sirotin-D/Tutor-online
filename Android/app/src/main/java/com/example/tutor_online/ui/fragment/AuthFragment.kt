@@ -14,7 +14,7 @@ import com.example.tutor_online.viewmodel.AuthViewModel
 import com.example.tutor_online.datamodel.viewDataModel.AuthViewDataModel
 import com.example.tutor_online.utils.datastorage.DataRepository
 
-class AuthFragment: Fragment() {
+class AuthFragment: Fragment(), IBaseView {
 
     private var _binding: FragmentAuthBinding? = null
     private val binding: FragmentAuthBinding get() = _binding!!
@@ -52,14 +52,13 @@ class AuthFragment: Fragment() {
                         binding.authErrorTextView.visibility = View.GONE
                     }
                     AuthViewDataModel.SHOW_LOADING -> {
-                        binding.authProgressBar.visibility = View.VISIBLE
+                        showLoading()
                     }
                     AuthViewDataModel.HIDE_LOADING -> {
-                        binding.authProgressBar.visibility = View.GONE
+                        hideLoading()
                     }
                     AuthViewDataModel.SHOW_ERROR -> {
-                        binding.authProgressBar.visibility = View.GONE
-                        binding.authErrorTextView.text = "Ошибка"
+                        showError(it.resourceId)
                     }
                     AuthViewDataModel.OPEN_MAIN_MENU -> {
                         val mainMenuIntent = Intent(context, MainActivity::class.java)
@@ -81,5 +80,18 @@ class AuthFragment: Fragment() {
     override fun onDestroy() {
         super.onDestroy()
         _binding = null
+    }
+
+    override fun showLoading() {
+        binding.authProgressBar.visibility = View.VISIBLE
+    }
+
+    override fun hideLoading() {
+        binding.authProgressBar.visibility = View.GONE
+    }
+
+    override fun showError(errorId: Int?) {
+        binding.authProgressBar.visibility = View.GONE
+        binding.authErrorTextView.text = "Ошибка"
     }
 }

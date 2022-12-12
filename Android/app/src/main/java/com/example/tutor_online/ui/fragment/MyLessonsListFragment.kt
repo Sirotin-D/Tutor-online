@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.example.tutor_online.R
 
-class MyLessonsListFragment: Fragment() {
+class MyLessonsListFragment: Fragment(), IBaseView {
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -15,5 +15,17 @@ class MyLessonsListFragment: Fragment() {
         savedInstanceState: Bundle?
     ): View {
         return inflater.inflate(R.layout.my_lessons_list_fragment, container, false)
+    }
+
+    override fun showLoading() {
+
+    }
+
+    override fun hideLoading() {
+
+    }
+
+    override fun showError(errorId: Int?) {
+
     }
 }
