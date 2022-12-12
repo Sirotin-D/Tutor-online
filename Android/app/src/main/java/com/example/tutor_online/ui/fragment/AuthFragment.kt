@@ -12,6 +12,7 @@ import com.example.tutor_online.databinding.FragmentAuthBinding
 import com.example.tutor_online.ui.activity.MainActivity
 import com.example.tutor_online.viewmodel.AuthViewModel
 import com.example.tutor_online.datamodel.viewDataModel.AuthViewDataModel
+import com.example.tutor_online.utils.datastorage.DataRepository
 
 class AuthFragment: Fragment() {
 
@@ -63,13 +64,11 @@ class AuthFragment: Fragment() {
                     AuthViewDataModel.OPEN_MAIN_MENU -> {
                         val mainMenuIntent = Intent(context, MainActivity::class.java)
                         val user = it.user
-                        val sharedPreferences = context?.getSharedPreferences("Auth", Context.MODE_PRIVATE)
-                        val sharedEditor = sharedPreferences?.edit()
-                        sharedEditor?.putString("userType", user?.userType.toString())
-                        sharedEditor?.putString("userName", user?.name)
-                        sharedEditor?.putString("userAge", user?.age)
-                        sharedEditor?.putString("userDescription", user?.description)
-                        sharedEditor?.apply()
+                        val userLogin = binding.authLoginEditText.text.toString()
+                        if (user != null) {
+                            val repos = DataRepository(context)
+                            repos.saveUser(user, userLogin)
+                        }
                         startActivity(mainMenuIntent)
                     }
                     else -> {}

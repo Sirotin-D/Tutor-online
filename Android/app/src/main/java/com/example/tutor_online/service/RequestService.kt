@@ -6,10 +6,9 @@ import com.example.tutor_online.datamodel.UserType
 
 class RequestService {
     fun getData(credentials: Pair<String, String>): User {
-        val testName = credentials.first
+        val testName = "Тестовый пользователь"
         val testAge = "22"
-        val testDescription = "Some description"
-        val userType = UserType.STUDENT
-        return User(userType, testName, testAge, testDescription)
+        val userType = "Студент"
+        return User(userType, testName, testAge)
     }
 }
