@@ -3,6 +3,7 @@ package com.example.tutor_online.viewmodel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.tutor_online.datamodel.User
 import com.example.tutor_online.ui.fragment.IAuthView
 import com.example.tutor_online.datamodel.viewDataModel.AuthViewDataModel
 import com.example.tutor_online.service.RequestService
@@ -38,6 +39,7 @@ class AuthViewModel(): ViewModel(), IAuthView {
             return
         }
         val user = RequestService().getData(Pair(login, password))
+
         val userState = AuthViewDataModel.OPEN_MAIN_MENU
         userState.user = user
         _authDisplayLiveData.postValue(userState)

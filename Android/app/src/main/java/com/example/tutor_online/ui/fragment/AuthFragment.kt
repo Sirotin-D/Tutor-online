@@ -65,6 +65,7 @@ class AuthFragment: Fragment() {
                         val user = it.user
                         val sharedPreferences = context?.getSharedPreferences("Auth", Context.MODE_PRIVATE)
                         val sharedEditor = sharedPreferences?.edit()
+                        sharedEditor?.putString("user_mail", binding.authLoginEditText.text.toString())
                         sharedEditor?.putString("userType", user?.userType.toString())
                         sharedEditor?.putString("userName", user?.name)
                         sharedEditor?.putString("userAge", user?.age)
