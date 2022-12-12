@@ -11,7 +11,7 @@ import com.example.tutor_online.databinding.FragmentMyProfileBinding
 import com.example.tutor_online.utils.datastorage.DataRepository
 import com.example.tutor_online.viewmodel.MyProfileViewModel
 
-class MyProfileFragment: Fragment() {
+class MyProfileFragment: Fragment(), IBaseView {
 
     private var _binding: FragmentMyProfileBinding? = null
     private val binding: FragmentMyProfileBinding get() = _binding!!
@@ -44,5 +44,17 @@ class MyProfileFragment: Fragment() {
         binding.userAgeTextView.text = userAge
         binding.userNameTextView.text = userName
         binding.userTypeTextView.text = userType
+    }
+
+    override fun showLoading() {
+
+    }
+
+    override fun hideLoading() {
+
+    }
+
+    override fun showError(errorId: Int?) {
+        
     }
 }
