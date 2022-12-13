@@ -3,43 +3,50 @@ package com.tutor.TutorSystem.models;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "tutor")
-public class Tutor {
+@Table(name = "users")
+public class User {
     @Id
-    @Column(name = "tutor_id")
+    @Column(name = "user_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    @Column(name = "name")
+
+    @Column(name="name")
     private String name;
-    @Column(name = "surname")
+
+    @Column(name="surname")
     private String surname;
-    @Column(name = "second_name")
+
+    @Column(name="second_name")
     private String secondName;
-    @Column(name = "age")
+
+    @Column(name="age")
     private int age;
-    @Column(name = "email")
+
+    @Column(name="email")
     private String email;
-    @Column(name = "phone_number")
-    private String phoneNumber;
 
-    public String getPhoneNumber() {
-        return phoneNumber;
+    @Column(name="type")
+    private String type;
+
+    public User() {
     }
 
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
-    }
-
-    public Tutor() {
-    }
-
-    public Tutor(int id, String name, String surname, String secondName, int age, String email) {
+    public User(int id, String name, String surname, String secondName, int age, String email, String type) {
         this.id = id;
         this.name = name;
         this.surname = surname;
         this.secondName = secondName;
         this.age = age;
         this.email = email;
+        this.type = type;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 
     public int getId() {
