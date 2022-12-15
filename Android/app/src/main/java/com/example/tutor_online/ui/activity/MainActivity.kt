@@ -27,5 +27,12 @@ class MainActivity : AppCompatActivity() {
                 R.id.my_lesson_list_fragment))
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
+        val actionBar = actionBar
+        actionBar?.setDisplayHomeAsUpEnabled(true)
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+        return true
     }
 }
