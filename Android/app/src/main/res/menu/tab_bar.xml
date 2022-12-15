@@ -6,12 +6,12 @@
         android:title="@string/my_profile" />
 
     <item
-        android:id="@+id/lessons_list_fragment"
+        android:id="@+id/lesson_list_navigation_graph"
         android:icon="@drawable/ic_lessons_list"
         android:title="@string/lessons_list" />
 
     <item
-        android:id="@+id/my_lessons_list_fragment"
+        android:id="@+id/my_lesson_list_fragment"
         android:icon="@drawable/ic_my_lessons_list"
         android:title="@string/my_lessons" />
 </menu>

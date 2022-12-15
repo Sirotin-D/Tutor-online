@@ -21,7 +21,7 @@ class AuthViewModel(): ViewModel(), IBaseView {
         _authDisplayLiveData.postValue(AuthViewDataModel.HIDE_LOADING)
     }
 
-    override fun showError(errorId: Int) {
+    override fun showError(errorId: Int?) {
         val authDisplayType = AuthViewDataModel.SHOW_ERROR
         authDisplayType.resourceId = errorId
         _authDisplayLiveData.postValue(authDisplayType)
@@ -37,7 +37,7 @@ class AuthViewModel(): ViewModel(), IBaseView {
             hideLoading()
             return
         }
-        val user = RequestService().getData(Pair(login, password))
+        val user = RequestService().auth(Pair(login, password))
 
         val userState = AuthViewDataModel.OPEN_MAIN_MENU
         userState.user = user
