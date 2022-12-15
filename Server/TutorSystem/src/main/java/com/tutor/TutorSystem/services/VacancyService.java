@@ -12,22 +12,32 @@ import java.util.Optional;
 
 
 @Service
-@Transactional(readOnly = true)
+@Transactional(readOnly = false)
 public class VacancyService {
 
-    private final VacancyRepository VacancyRepository;
+    private final VacancyRepository vacancyRepository;
 
     @Autowired
-    public VacancyService(VacancyRepository VacancyRepository) {
-        this.VacancyRepository = VacancyRepository;
+    public VacancyService(VacancyRepository vacancyRepository) {
+        this.vacancyRepository = vacancyRepository;
     }
 
     public List<Vacancy> findAll() {
-        return VacancyRepository.findAll();
+        return vacancyRepository.findAll();
     }
 
     public Vacancy findOne(int id) {
-        Optional<Vacancy> foundPerson = VacancyRepository.findById(id);
+        Optional<Vacancy> foundPerson = vacancyRepository.findById(id);
         return foundPerson.orElse(null);
+    }
+
+    public Vacancy save(Vacancy vacancy)
+    {
+        return vacancyRepository.save(vacancy);
+    }
+
+    public void delete(int id)
+    {
+        vacancyRepository.delete(vacancyRepository.findById(id).orElse(null));
     }
 }

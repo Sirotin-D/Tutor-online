@@ -17,18 +17,40 @@ public class Lesson {
     int studentId;
     @Column(name = "vacancy_id")
     int vacancyId;
-    @Column(name = "status_id")
+    @Column(name = "status")
     int status;
+    @Column(name = "fields")
+    String field;
+    @Column(name = "date_time")
+    String dateTime;
 
-    public Lesson() {
-    }
-
-    public Lesson(int lessonId, int tutorId, int studentId, int vacancyId, int status) {
+    public Lesson(int lessonId, int tutorId, int studentId, int vacancyId, int status, String fields, String time) {
         this.lessonId = lessonId;
         this.tutorId = tutorId;
         this.studentId = studentId;
         this.vacancyId = vacancyId;
         this.status = status;
+        this.field = fields;
+        this.dateTime = time;
+    }
+
+    public Lesson() {
+    }
+
+    public String getField() {
+        return field;
+    }
+
+    public void setField(String field) {
+        this.field = field;
+    }
+
+    public String getDateTime() {
+        return dateTime;
+    }
+
+    public void setDateTime(String dateTime) {
+        this.dateTime = dateTime;
     }
 
     public int getLessonId() {
