@@ -13,7 +13,7 @@ public class Vacancy {
     private int tutorId;
     @Column(name = "status")
     private int status;
-    @Column(name = "filds")
+    @Column(name = "fields")
     private String fields;
 
     public Vacancy(int vacancyId, int tutorId, int status, String fields) {
