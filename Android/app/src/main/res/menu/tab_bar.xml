@@ -8,10 +8,10 @@
     <item
         android:id="@+id/lesson_list_navigation_graph"
         android:icon="@drawable/ic_lessons_list"
-        android:title="@string/lessons_list" />
+        android:title="@string/lesson_list" />
 
     <item
-        android:id="@+id/my_lesson_list_fragment"
+        android:id="@+id/my_lesson_list_navigation_graph"
         android:icon="@drawable/ic_my_lessons_list"
-        android:title="@string/my_lessons" />
+        android:title="@string/my_lesson_list" />
 </menu>
