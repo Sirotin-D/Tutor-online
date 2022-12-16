@@ -31,4 +31,14 @@ class RequestService {
         testLessonsList.add(Lesson("test_lesson_id","test_title4", "test_description4", "test_tutor1", "tutor_id"))
         return testLessonsList
     }
+
+    fun getCurrentLesson(id: String): Lesson {
+        return Lesson(
+            "test_lesson_id",
+            "test_title1",
+            "test_description1",
+            "test_tutor1",
+            "tutor_id"
+        )
+    }
 }
