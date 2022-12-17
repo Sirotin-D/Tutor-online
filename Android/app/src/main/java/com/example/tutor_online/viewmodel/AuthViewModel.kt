@@ -7,7 +7,7 @@ import com.example.tutor_online.ui.fragment.IBaseView
 import com.example.tutor_online.datamodel.viewDataModel.AuthViewDataModel
 import com.example.tutor_online.service.RequestService
 
-class AuthViewModel(): ViewModel(), IBaseView {
+class AuthViewModel: ViewModel(), IBaseView {
 
     private val _authDisplayLiveData: MutableLiveData<AuthViewDataModel> = MutableLiveData()
     val authDisplayLiveData: LiveData<AuthViewDataModel> = _authDisplayLiveData

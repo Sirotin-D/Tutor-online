@@ -17,7 +17,6 @@ import com.example.tutor_online.datamodel.Lesson
 import com.example.tutor_online.datamodel.viewDataModel.LessonListViewDataModel
 import com.example.tutor_online.ui.fragment.adapter.LessonListAdapter
 import com.example.tutor_online.viewmodel.LessonListViewModel
-import java.text.FieldPosition
 
 class LessonListFragment: Fragment(), IBaseView, OnItemClickListener {
     private var _binding: LessonListFragmentBinding? = null
