@@ -4,15 +4,15 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.tutor_online.databinding.LessonItemBinding
-import com.example.tutor_online.datamodel.Lesson
+import com.example.tutor_online.datamodel.RequestLesson
 import com.example.tutor_online.ui.fragment.OnItemClickListener
 
-class LessonListAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class MyLessonListAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     var mItemClickListener: OnItemClickListener? = null
-    private val mLessonList: MutableList<Lesson> = mutableListOf()
+    private val mLessonList: MutableList<RequestLesson> = mutableListOf()
 
-    fun setLessonList(items: List<Lesson>) {
+    fun setLessonList(items: List<RequestLesson>) {
         mLessonList.clear()
         mLessonList.addAll(items)
         notifyDataSetChanged()
@@ -28,7 +28,7 @@ class LessonListAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         val itemViewHolder = holder as ItemViewHolder
         val currentLesson = mLessonList[position]
         holder.itemView.setOnClickListener {
-            mItemClickListener?.onItemClick(currentLesson.lesson_id)
+            mItemClickListener?.onItemClick(currentLesson.request_id)
         }
         itemViewHolder.bind(currentLesson)
     }
@@ -38,9 +38,9 @@ class LessonListAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     }
 
     inner class ItemViewHolder(private val binding: LessonItemBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(lessonItem: Lesson) {
-            binding.lessonTitleTextView.text = lessonItem.lesson_title
-            binding.lessonTutorName.text = lessonItem.lesson_tutor_name
+        fun bind(lessonItem: RequestLesson) {
+            binding.lessonTitleTextView.text = lessonItem.request_lesson_title
+            binding.lessonTutorName.text = lessonItem.request_lesson_tutor_name
         }
     }
 }

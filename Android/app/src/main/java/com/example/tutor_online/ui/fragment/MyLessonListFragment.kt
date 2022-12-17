@@ -13,9 +13,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.tutor_online.R
 import com.example.tutor_online.databinding.MyLessonListFragmentBinding
-import com.example.tutor_online.datamodel.Lesson
+import com.example.tutor_online.datamodel.RequestLesson
 import com.example.tutor_online.datamodel.viewDataModel.LessonListViewDataModel
-import com.example.tutor_online.ui.fragment.adapter.LessonListAdapter
+import com.example.tutor_online.ui.fragment.adapter.MyLessonListAdapter
 import com.example.tutor_online.viewmodel.MyLessonListViewModel
 
 class MyLessonListFragment: Fragment(), IBaseView, OnItemClickListener {
@@ -24,8 +24,8 @@ class MyLessonListFragment: Fragment(), IBaseView, OnItemClickListener {
 
     private lateinit var viewModel: MyLessonListViewModel
 
-    private var _adapter: LessonListAdapter? = null
-    private val adapter: LessonListAdapter get() = _adapter!!
+    private var _adapter: MyLessonListAdapter? = null
+    private val adapter: MyLessonListAdapter get() = _adapter!!
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -38,7 +38,7 @@ class MyLessonListFragment: Fragment(), IBaseView, OnItemClickListener {
         savedInstanceState: Bundle?
     ): View {
         _binding = MyLessonListFragmentBinding.inflate(inflater, container, false)
-        _adapter = LessonListAdapter()
+        _adapter = MyLessonListAdapter()
         binding.myLessonListRecyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
                 super.onScrollStateChanged(recyclerView, newState)
@@ -89,7 +89,7 @@ class MyLessonListFragment: Fragment(), IBaseView, OnItemClickListener {
         _adapter = null
     }
 
-    private fun onLessonsListChanged(list: List<Lesson>?) {
+    private fun onLessonsListChanged(list: List<RequestLesson>?) {
         if (list.isNullOrEmpty()) {
             adapter.setLessonList(listOf())
             binding.emptyMyLessonListTextView.visibility = View.VISIBLE
@@ -113,7 +113,7 @@ class MyLessonListFragment: Fragment(), IBaseView, OnItemClickListener {
 
     override fun onItemClick(id: String) {
         val bundle = Bundle()
-        bundle.putString("id", id)
+        bundle.putString("request_lesson_id", id)
         findNavController().navigate(R.id.lessonFragment, bundle)
     }
 }
