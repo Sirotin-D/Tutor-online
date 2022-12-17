@@ -22,15 +22,27 @@ public class User {
     @Column(name="type")
     private String type;
 
+    @Column(name = "phone")
+    private String phone;
+
     public User() {
     }
 
-    public User(int id, String name, int age, String email, String type) {
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public User(int id, String name, int age, String email, String type, String phone) {
         this.id = id;
         this.name = name;
         this.age = age;
         this.email = email;
         this.type = type;
+        this.phone = phone;
     }
 
     public int getId() {

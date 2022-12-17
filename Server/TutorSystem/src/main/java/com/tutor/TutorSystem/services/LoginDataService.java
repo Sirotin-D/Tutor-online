@@ -21,11 +21,15 @@ public class LoginDataService {
         loginDataRepository.save(loginData);
     }
 
-    public boolean isRightPasswordForEmail(LoginData loginData){
-        String rightPassword = loginDataRepository
-                .findByEmail(loginData.getEmail()).getPassword();
-        boolean result = rightPassword.equals(loginData.getPassword());
-        return result;
+    public boolean isRightPasswordForEmail(LoginData loginData) {
+        LoginData loginData1 = loginDataRepository
+                .findByEmail(loginData.getEmail());
+        if (loginData1 != null) {
+            String rightPassword = loginData1.getPassword();
+            boolean result = rightPassword.equals(loginData.getPassword());
+            return result;
+        }
+        else return false;
     }
 }
 
