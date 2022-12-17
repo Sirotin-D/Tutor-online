@@ -10,14 +10,8 @@
         android:name="com.example.tutor_online.ui.fragment.MyProfileFragment"
         android:label="@string/my_profile"
         tools:layout="@layout/fragment_my_profile" />
-    <fragment
-        android:id="@+id/lessons_list_fragment"
-        android:name="com.example.tutor_online.ui.fragment.LessonListFragment"
-        android:label="@string/lessons_list"
-        tools:layout="@layout/lessons_list_fragment" />
-    <fragment
-        android:id="@+id/my_lessons_list_fragment"
-        android:name="com.example.tutor_online.ui.fragment.MyLessonsListFragment"
-        android:label="@string/my_lessons"
-        tools:layout="@layout/my_lessons_list_fragment" />
+
+    <include app:graph="@navigation/lesson_list_navigation_graph" />
+    <include app:graph="@navigation/my_lesson_list_navigation_graph" />
+
 </navigation>

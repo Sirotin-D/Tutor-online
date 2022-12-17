@@ -33,17 +33,12 @@ class MyProfileFragment: Fragment(), IBaseView {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val repos = DataRepository(context)
-        val credentials = repos.getUserData()
-        val user = credentials.first
-        val userName = user.name
-        val userAge = user.age
-        val userType = user.userType
-        val userMail = credentials.second
-        binding.userMailTextView.text = userMail
-        binding.userAgeTextView.text = userAge
-        binding.userNameTextView.text = userName
-        binding.userTypeTextView.text = userType
+        val user = DataRepository(context).getUserData()
+        binding.userNameTextView.text = user.user_name
+        binding.userAgeTextView.text = user.user_age
+        binding.userPhoneTextView.text = user.user_phone
+        binding.userTypeTextView.text = user.user_type
+        binding.userMailTextView.text = user.user_email
     }
 
     override fun showLoading() {
