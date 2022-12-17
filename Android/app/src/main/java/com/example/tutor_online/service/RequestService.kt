@@ -22,6 +22,18 @@ class RequestService {
 
     }
 
+    fun cancelLesson(userId: String, requestLessonId: String) {
+
+    }
+
+    fun acceptLesson(userId: String, requestLessonId: String) {
+
+    }
+
+    fun deleteLesson(userId: String, requestLessonId: String) {
+
+    }
+
     private fun getTestUser(): User {
         val testUserId = "1"
         val testUserName = "Тестовый пользователь"

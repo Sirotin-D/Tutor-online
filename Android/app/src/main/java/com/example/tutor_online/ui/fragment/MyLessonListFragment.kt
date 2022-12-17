@@ -111,9 +111,29 @@ class MyLessonListFragment: Fragment(), IBaseView, OnItemClickListener {
 
     }
 
-    override fun onItemClick(id: String) {
-        val bundle = Bundle()
-        bundle.putString("request_lesson_id", id)
-        findNavController().navigate(R.id.lessonFragment, bundle)
+    override fun onItemClick(position: Int) {
+        val currentLesson = viewModel.myLessonsListLiveData.value?.get(position)
+        if (currentLesson != null) {
+            val requestId = currentLesson.request_id
+            val requestLessonId = currentLesson.request_lesson_id
+            val lessonTitle = currentLesson.request_lesson_title
+            val lessonDescription = currentLesson.request_lesson_description
+            val lessonTutorName = currentLesson.request_lesson_tutor_name
+            val lessonTutorId = currentLesson.request_tutor_id
+            val lessonWelcomeMessage = currentLesson.request_welcome_message
+            val requestStudentId = currentLesson.request_student_id
+            val requestStatus = currentLesson.request_status
+            val bundle = Bundle()
+            bundle.putString("request_id", requestId)
+            bundle.putString("request_lesson_id", requestLessonId)
+            bundle.putString("request_lesson_title", lessonTitle)
+            bundle.putString("request_lesson_description", lessonDescription)
+            bundle.putString("request_lesson_tutor_name", lessonTutorName)
+            bundle.putString("request_tutor_id", lessonTutorId)
+            bundle.putString("request_welcome_message", lessonWelcomeMessage)
+            bundle.putString("request_student_id", requestStudentId)
+            bundle.putString("request_status", requestStatus)
+            findNavController().navigate(R.id.requestLessonFragment, bundle)
+        }
     }
 }
