@@ -5,19 +5,19 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.example.tutor_online.R
 import com.example.tutor_online.databinding.LessonFragmentBinding
+import com.example.tutor_online.datamodel.Lesson
 import com.example.tutor_online.datamodel.viewDataModel.LessonViewDataModel
+import com.example.tutor_online.utils.datastorage.DataRepository
 import com.example.tutor_online.viewmodel.LessonViewModel
 
 class LessonFragment : Fragment(), IBaseView {
     private var _binding: LessonFragmentBinding? = null
     private val binding: LessonFragmentBinding get() = _binding!!
     private lateinit var viewModel: LessonViewModel
-    private var mLessonId: String? = null
+    private lateinit var mLesson: Lesson
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -30,16 +30,25 @@ class LessonFragment : Fragment(), IBaseView {
         savedInstanceState: Bundle?
     ): View {
         _binding = LessonFragmentBinding.inflate(inflater, container, false)
-        val lessonId = arguments?.getString("id")
-        mLessonId = lessonId
-        binding.cancelRequestLessonButton.visibility = View.GONE
+        val lessonId = requireArguments().getString("lesson_id")
+        val lessonTitle = requireArguments().getString("lesson_title")
+        val lessonDescription = requireArguments().getString("lesson_description")
+        val lessonTutorName = requireArguments().getString("lesson_tutor_name")
+        val lessonTutorId = requireArguments().getString("lesson_tutor_id")
+        val lessonWelcomeMessage = requireArguments().getString("lesson_welcome_message")
+
+        mLesson = Lesson(
+            lessonId!!,
+            lessonTitle!!,
+            lessonDescription!!,
+            lessonTutorName!!,
+            lessonTutorId!!,
+            lessonWelcomeMessage!!
+        )
+        binding.requestLessonButton.visibility = View.GONE
         binding.requestLessonButton.setOnClickListener {
-            Toast.makeText(context, R.string.success_request, Toast.LENGTH_LONG).show()
-            binding.requestLessonButton.isEnabled = false
-        }
-        binding.cancelRequestLessonButton.setOnClickListener {
-            Toast.makeText(context, R.string.cancelled_request, Toast.LENGTH_LONG).show()
-            binding.cancelRequestLessonButton.isEnabled = false
+            val userId = DataRepository(context).getUserData().user_id!!
+            viewModel.handleRequestButtonClick(userId, mLesson.lesson_id)
         }
         return binding.root
     }
@@ -47,22 +56,15 @@ class LessonFragment : Fragment(), IBaseView {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel.apply {
-            lessonLiveData.observe(viewLifecycleOwner) {
-                binding.lessonTitleTextView.text = it.title
-                binding.tutorNameTextView.text = it.tutorName
-                binding.lessonDescriptionTextView.text = it.description
-            }
-
             lessonStateLiveData.observe(viewLifecycleOwner) {
                 when (it) {
-                    LessonViewDataModel.SHOW_LOADING -> {
-
-                    }
-                    LessonViewDataModel.HIDE_LOADING -> {
-
-                    }
-                    LessonViewDataModel.SHOW_ERROR -> {
-
+                    LessonViewDataModel.INITIAL_STATE -> {
+                        binding.lessonTitleTextView.text = mLesson.lesson_title
+                        binding.tutorNameTextView.text = mLesson.lesson_tutor_name
+                        binding.lessonDescriptionTextView.text = mLesson.lesson_description
+                        if (DataRepository(context).getUserData().user_type == "student") {
+                            binding.requestLessonButton.visibility = View.VISIBLE
+                        }
                     }
                     else -> {}
                 }

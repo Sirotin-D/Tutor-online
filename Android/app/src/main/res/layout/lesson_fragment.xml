@@ -18,7 +18,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <RelativeLayout
-        android:id="@+id/lesson_description_view"
+        android:id="@+id/lesson_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
@@ -37,16 +37,6 @@
             android:textSize="20sp" />
 
         <TextView
-            android:id="@+id/lesson_category_text_view"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentEnd="true"
-            android:layout_marginTop="5dp"
-            android:textSize="20sp"
-            android:layout_below="@+id/lesson_title_text_view"/>
-
-        <TextView
             android:id="@+id/tutor_name_text_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -54,7 +44,7 @@
             android:layout_alignParentEnd="true"
             android:layout_marginTop="5dp"
             android:textSize="20sp"
-            android:layout_below="@id/lesson_category_text_view"/>
+            android:layout_below="@id/lesson_title_text_view"/>
 
         <TextView
             android:id="@+id/lesson_description_text_view"
@@ -66,44 +56,15 @@
             android:textSize="20sp"
             android:layout_below="@id/tutor_name_text_view"/>
 
-        <TextView
-            android:id="@+id/lesson_status"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentEnd="true"
-            android:layout_marginTop="5dp"
-            android:textSize="20sp"
-            android:layout_below="@+id/lesson_description_text_view" />
-
-        <TextView
-            android:id="@+id/lesson_welcome_message"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentEnd="true"
-            android:layout_marginTop="5dp"
-            android:textSize="20sp"
-            android:layout_below="@+id/lesson_status"/>
-
     </RelativeLayout>
 
     <Button
         android:id="@+id/request_lesson_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/lesson_description_view"
+        app:layout_constraintTop_toBottomOf="@+id/lesson_view"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:text="@string/request_lesson"/>
-
-    <Button
-        android:id="@+id/cancel_request_lesson_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/lesson_description_view"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:text="@string/cancel_lesson_request"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -18,6 +18,10 @@ class RequestService {
         return getTestMyLessonList()
     }
 
+    fun requestLesson(userId: String, lessonId: String) {
+
+    }
+
     private fun getTestUser(): User {
         val testUserId = "1"
         val testUserName = "Тестовый пользователь"
@@ -94,15 +98,5 @@ class RequestService {
             "1",
             "cancelled"))
         return testLessonsList
-    }
-
-    fun getCurrentLesson(id: String): Lesson {
-        return Lesson(
-            "test_lesson_id",
-            "test_title1",
-            "test_description1",
-            "test_tutor1",
-            "tutor_id"
-        )
     }
 }

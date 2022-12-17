@@ -17,6 +17,7 @@ import com.example.tutor_online.datamodel.Lesson
 import com.example.tutor_online.datamodel.viewDataModel.LessonListViewDataModel
 import com.example.tutor_online.ui.fragment.adapter.LessonListAdapter
 import com.example.tutor_online.viewmodel.LessonListViewModel
+import java.text.FieldPosition
 
 class LessonListFragment: Fragment(), IBaseView, OnItemClickListener {
     private var _binding: LessonListFragmentBinding? = null
@@ -111,9 +112,23 @@ class LessonListFragment: Fragment(), IBaseView, OnItemClickListener {
 
     }
 
-    override fun onItemClick(id: String) {
-        val bundle = Bundle()
-        bundle.putString("id", id)
-        findNavController().navigate(R.id.lessonFragment, bundle)
+    override fun onItemClick(position: Int) {
+        val currentLesson = viewModel.lessonsListLiveData.value?.get(position)
+        if (currentLesson != null) {
+            val lessonId = currentLesson.lesson_id
+            val lessonTitle = currentLesson.lesson_title
+            val lessonDescription = currentLesson.lesson_description
+            val lessonTutorName = currentLesson.lesson_tutor_name
+            val lessonTutorId = currentLesson.lesson_tutor_id
+            val lessonWelcomeMessage = currentLesson.lesson_welcome_message
+            val bundle = Bundle()
+            bundle.putString("lesson_id", lessonId)
+            bundle.putString("lesson_title", lessonTitle)
+            bundle.putString("lesson_description", lessonDescription)
+            bundle.putString("lesson_tutor_name", lessonTutorName)
+            bundle.putString("lesson_tutor_id", lessonTutorId)
+            bundle.putString("lesson_welcome_message", lessonWelcomeMessage)
+            findNavController().navigate(R.id.lessonFragment, bundle)
+        }
     }
 }
