@@ -1,8 +1,5 @@
 package com.tutor.TutorSystem.services;
-
 import com.tutor.TutorSystem.models.Lesson;
-
-import com.tutor.TutorSystem.models.User;
 import com.tutor.TutorSystem.repository.LessonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -32,25 +29,13 @@ public class LessonService {
         return foundPerson.orElse(null);
     }
 
-    public List<Lesson> findByStudentId(int studentId){
-        List<Lesson> foundPerson = lessonRepository.findByStudentId(studentId);
-        return foundPerson;
+    public Lesson save(Lesson vacancy)
+    {
+        return lessonRepository.save(vacancy);
     }
 
-    public List<Lesson> findByTutorId(int tutorId){
-        List<Lesson> foundPerson = lessonRepository.findByTutorId(tutorId);
-        return foundPerson;
-    }
-
-    public void save(Lesson lesson) {
-        lessonRepository.save(lesson);
-    }
-
-    public void delete(int id) {
+    public void delete(int id)
+    {
         lessonRepository.delete(lessonRepository.findById(id).orElse(null));
-    }
-
-    public void update(Lesson lesson){
-        lessonRepository.save(lesson);
     }
 }
