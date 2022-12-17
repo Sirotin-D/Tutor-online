@@ -66,7 +66,7 @@ class AuthFragment: Fragment(), IBaseView {
                         val userLogin = binding.authLoginEditText.text.toString()
                         if (user != null) {
                             val repos = DataRepository(context)
-                            repos.saveUser(user, userLogin)
+                            repos.saveUser(user)
                         }
                         startActivity(mainMenuIntent)
                     }
