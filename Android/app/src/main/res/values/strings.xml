@@ -13,4 +13,8 @@
     <string name="test_age">22</string>
     <string name="test_main">Почта</string>
     <string name="empty_lessons_list">Занятия отсутствуют</string>
+    <string name="request_lesson">Записаться</string>
+    <string name="cancel_lesson_request">Отменить запись</string>
+    <string name="success_request">Вы успешно записаны</string>
+    <string name="cancelled_request">Вы отменили запрос на урок</string>
 </resources>

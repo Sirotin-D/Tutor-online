@@ -18,6 +18,10 @@ class RequestService {
         return getTestMyLessonList()
     }
 
+    fun requestLesson(userId: String, lessonId: String) {
+
+    }
+
     private fun getTestUser(): User {
         val testUserId = "1"
         val testUserName = "Тестовый пользователь"

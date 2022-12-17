@@ -28,7 +28,7 @@ class LessonListAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         val itemViewHolder = holder as ItemViewHolder
         val currentLesson = mLessonList[position]
         holder.itemView.setOnClickListener {
-            mItemClickListener?.onItemClick(currentLesson.lesson_id)
+            mItemClickListener?.onItemClick(position)
         }
         itemViewHolder.bind(currentLesson)
     }
