@@ -1,7 +1,5 @@
 package com.tutor.TutorSystem.models;
 
-import org.springframework.context.annotation.EnableMBeanExport;
-
 import javax.persistence.*;
 
 @Entity
@@ -10,47 +8,19 @@ public class Lesson {
     @Id
     @Column(name = "lesson_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    int lessonId;
-    @Column(name = "tutor_id")
-    int tutorId;
-    @Column(name = "student_id")
-    int studentId;
-    @Column(name = "vacancy_id")
-    int vacancyId;
-    @Column(name = "status")
-    int status;
-    @Column(name = "fields")
-    String field;
-    @Column(name = "date_time")
-    String dateTime;
-
-    public Lesson(int lessonId, int tutorId, int studentId, int vacancyId, int status, String fields, String time) {
-        this.lessonId = lessonId;
-        this.tutorId = tutorId;
-        this.studentId = studentId;
-        this.vacancyId = vacancyId;
-        this.status = status;
-        this.field = fields;
-        this.dateTime = time;
-    }
+    private int lessonId;
+    @Column(name = "lesson_tutor_id")
+    private int tutorId;
+    @Column(name = "lesson_tutor_name")
+    private String tutorName;
+    @Column(name = "lesson_title")
+    private String title;
+    @Column(name = "lesson_welcome_message")
+    private String welcomeMessage;
+    @Column(name = "lesson_description")
+    private String description;
 
     public Lesson() {
-    }
-
-    public String getField() {
-        return field;
-    }
-
-    public void setField(String field) {
-        this.field = field;
-    }
-
-    public String getDateTime() {
-        return dateTime;
-    }
-
-    public void setDateTime(String dateTime) {
-        this.dateTime = dateTime;
     }
 
     public int getLessonId() {
@@ -69,27 +39,46 @@ public class Lesson {
         this.tutorId = tutorId;
     }
 
-    public int getStudentId() {
-        return studentId;
+
+
+    public String getTitle() {
+        return title;
     }
 
-    public void setStudentId(int studentId) {
-        this.studentId = studentId;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
-    public int getVacancyId() {
-        return vacancyId;
+    public String getWelcomeMessage() {
+        return welcomeMessage;
     }
 
-    public void setVacancyId(int vacancyId) {
-        this.vacancyId = vacancyId;
+    public void setWelcomeMessage(String welcomeMessage) {
+        this.welcomeMessage = welcomeMessage;
     }
 
-    public int getStatus() {
-        return status;
+    public String getDescription() {
+        return description;
     }
 
-    public void setStatus(int status) {
-        this.status = status;
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getTutorName() {
+        return tutorName;
+    }
+
+    public void setTutorName(String tutorName) {
+        this.tutorName = tutorName;
+    }
+
+    public Lesson(int lessonId, int tutorId, String tutorName, String title, String welcomeMessage, String description) {
+        this.lessonId = lessonId;
+        this.tutorId = tutorId;
+        this.tutorName = tutorName;
+        this.title = title;
+        this.welcomeMessage = welcomeMessage;
+        this.description = description;
     }
 }
