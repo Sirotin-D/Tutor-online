@@ -8,7 +8,8 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.tutor_online.databinding.CreateLessonFragmentBinding
-import com.example.tutor_online.datamodel.viewDataModel.CreateLessonViewDataModel
+import com.example.tutor_online.datamodel.viewdatamodel.CreateLessonViewDataModel
+import com.example.tutor_online.ui.activity.MainActivity
 import com.example.tutor_online.utils.datastorage.DataRepository
 import com.example.tutor_online.viewmodel.CreateLessonViewModel
 
@@ -30,9 +31,9 @@ class CreateLessonFragment: Fragment(), IBaseView {
     ): View {
         _binding = CreateLessonFragmentBinding.inflate(inflater, container, false)
         binding.acceptCreateButtonLesson.setOnClickListener {
-            val tutorId = DataRepository(context).getUserData().user_id
+            val tutor = DataRepository(context).getUserData()
             viewModel.createLessonButtonPressed(
-                tutorId!!,
+                tutor,
                 binding.lessonTitleEditText.text.toString(),
                 binding.lessonDescriptionEditText.text.toString(),
                 binding.lessonContactDataEditText.text.toString()
@@ -50,10 +51,10 @@ class CreateLessonFragment: Fragment(), IBaseView {
 
                     }
                     CreateLessonViewDataModel.SHOW_ERROR -> {
-
+                        showError(it.errorMessage.toString())
                     }
                     CreateLessonViewDataModel.LESSON_CREATED -> {
-
+                        lessonCreated()
                     }
                     else -> {}
                 }
@@ -75,7 +76,12 @@ class CreateLessonFragment: Fragment(), IBaseView {
 
     }
 
-    override fun showError(errorId: Int?) {
+    private fun lessonCreated() {
+        showError("Урок создан")
+    }
 
+    override fun showError(errorMessage: String) {
+        val activity = activity as MainActivity
+        activity.createNotification(errorMessage)
     }
 }

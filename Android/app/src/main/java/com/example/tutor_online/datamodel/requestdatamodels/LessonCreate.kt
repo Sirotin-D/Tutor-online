@@ -1,7 +1,6 @@
-package com.example.tutor_online.datamodel
+package com.example.tutor_online.datamodel.requestdatamodels
 
-data class Lesson(
-    val lessonId: Int,
+data class LessonCreate(
     val tutorId: Int,
     val tutorName: String,
     val title: String,

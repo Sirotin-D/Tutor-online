@@ -16,23 +16,26 @@ class DataRepository(context: Context?) {
 
     fun saveUser(userData: User) {
         val sharedEditor = settings?.edit()
-        sharedEditor?.putString("user_id", userData.user_id)
-        sharedEditor?.putString("user_name", userData.user_name)
-        sharedEditor?.putString("user_age", userData.user_age)
-        sharedEditor?.putString("user_phone", userData.user_phone)
-        sharedEditor?.putString("user_email", userData.user_email)
-        sharedEditor?.putString("user_type", userData.user_type)
+        sharedEditor?.putInt("user_id", userData.id)
+        sharedEditor?.putString("user_name", userData.name)
+        sharedEditor?.putInt("user_age", userData.age)
+        sharedEditor?.putString("user_phone", userData.phone)
+        sharedEditor?.putString("user_email", userData.email)
+        sharedEditor?.putString("user_type", userData.type)
         sharedEditor?.apply()
     }
 
-
     fun getUserData(): User {
-        val userId = settings?.getString("user_id", null)
+        val userId = settings?.getInt("user_id", 0)
         val userName = settings?.getString("user_name", null)
-        val userAge = settings?.getString("user_age", null)
+        val userAge = settings?.getInt("user_age", 0)
         val userPhone = settings?.getString("user_phone", null)
         val userEmail = settings?.getString("user_email", null)
         val userType = settings?.getString("user_type", null)
-        return User(userId, userName, userAge, userPhone, userEmail, userType)
+        return User(userId!!, userName!!, userAge!!, userEmail!!, userType!!, userPhone!!)
+    }
+
+    fun deleteUserData() {
+        settings?.edit()?.clear()?.apply()
     }
 }

@@ -39,8 +39,8 @@ class LessonListAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     inner class ItemViewHolder(private val binding: LessonItemBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(lessonItem: Lesson) {
-            binding.lessonTitleTextView.text = lessonItem.lesson_title
-            binding.lessonTutorName.text = lessonItem.lesson_tutor_name
+            binding.lessonTitleTextView.text = lessonItem.title
+            binding.lessonTutorName.text = "Преподаватель: ${lessonItem.tutorName}"
         }
     }
 }

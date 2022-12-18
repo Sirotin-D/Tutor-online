@@ -9,7 +9,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.tutor_online.databinding.RegisterFragmentBinding
-import com.example.tutor_online.datamodel.viewDataModel.RegisterViewDataModel
+import com.example.tutor_online.datamodel.viewdatamodel.RegisterViewDataModel
 import com.example.tutor_online.ui.activity.MainActivity
 import com.example.tutor_online.utils.datastorage.DataRepository
 import com.example.tutor_online.viewmodel.RegisterViewModel
@@ -34,7 +34,7 @@ class RegisterFragment: Fragment(), IBaseView {
         binding.acceptCreateButtonLesson.setOnClickListener {
             viewModel.registerButtonPressed(
                 binding.registerNameEditText.text.toString(),
-                binding.registerAgeEditText.text.toString(),
+                binding.registerAgeEditText.text.toString().toInt(),
                 binding.registerPhoneEditText.text.toString(),
                 binding.registerEmailEditText.text.toString(),
                 binding.registerPasswordEditText.text.toString(),
@@ -52,7 +52,7 @@ class RegisterFragment: Fragment(), IBaseView {
                     RegisterViewDataModel.INITIAL_STATE -> {
 
                     }
-                    RegisterViewDataModel.END_REGISTER -> {
+                    RegisterViewDataModel.OPEN_MAIN_MENU -> {
                         val mainMenuIntent = Intent(context, MainActivity::class.java)
                         val user = it.user
                         if (user != null) {
@@ -60,6 +60,9 @@ class RegisterFragment: Fragment(), IBaseView {
                             repos.saveUser(user)
                         }
                         startActivity(mainMenuIntent)
+                    }
+                    RegisterViewDataModel.SHOW_ERROR -> {
+                        showError(it.errorMessage.toString())
                     }
                     else -> {}
                 }
@@ -81,7 +84,7 @@ class RegisterFragment: Fragment(), IBaseView {
 
     }
 
-    override fun showError(errorId: Int?) {
+    override fun showError(errorMessage: String) {
 
     }
 }

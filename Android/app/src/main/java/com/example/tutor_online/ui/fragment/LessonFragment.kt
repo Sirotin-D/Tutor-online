@@ -9,7 +9,8 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.tutor_online.databinding.LessonFragmentBinding
 import com.example.tutor_online.datamodel.Lesson
-import com.example.tutor_online.datamodel.viewDataModel.LessonViewDataModel
+import com.example.tutor_online.datamodel.viewdatamodel.LessonViewDataModel
+import com.example.tutor_online.ui.activity.MainActivity
 import com.example.tutor_online.utils.datastorage.DataRepository
 import com.example.tutor_online.viewmodel.LessonViewModel
 
@@ -30,25 +31,25 @@ class LessonFragment : Fragment(), IBaseView {
         savedInstanceState: Bundle?
     ): View {
         _binding = LessonFragmentBinding.inflate(inflater, container, false)
-        val lessonId = requireArguments().getString("lesson_id")
-        val lessonTitle = requireArguments().getString("lesson_title")
-        val lessonDescription = requireArguments().getString("lesson_description")
-        val lessonTutorName = requireArguments().getString("lesson_tutor_name")
-        val lessonTutorId = requireArguments().getString("lesson_tutor_id")
-        val lessonWelcomeMessage = requireArguments().getString("lesson_welcome_message")
+        val lessonId = requireArguments().getInt("lesson_id")
+        val title = requireArguments().getString("lesson_title")
+        val description = requireArguments().getString("lesson_description")
+        val tutorName = requireArguments().getString("lesson_tutor_name")
+        val tutorId = requireArguments().getInt("lesson_tutor_id")
+        val welcomeMessage = requireArguments().getString("lesson_welcome_message")
 
         mLesson = Lesson(
-            lessonId!!,
-            lessonTitle!!,
-            lessonDescription!!,
-            lessonTutorName!!,
-            lessonTutorId!!,
-            lessonWelcomeMessage!!
+            lessonId,
+            tutorId,
+            tutorName!!,
+            title!!,
+            welcomeMessage!!,
+            description!!
         )
         binding.requestLessonButton.visibility = View.GONE
         binding.requestLessonButton.setOnClickListener {
-            val userId = DataRepository(context).getUserData().user_id!!
-            viewModel.handleRequestButtonClick(userId, mLesson.lesson_id)
+            val userId = DataRepository(context).getUserData().id
+            viewModel.handleRequestButtonClick(userId, mLesson.lessonId)
         }
         return binding.root
     }
@@ -59,12 +60,18 @@ class LessonFragment : Fragment(), IBaseView {
             lessonStateLiveData.observe(viewLifecycleOwner) {
                 when (it) {
                     LessonViewDataModel.INITIAL_STATE -> {
-                        binding.lessonTitleTextView.text = mLesson.lesson_title
-                        binding.tutorNameTextView.text = mLesson.lesson_tutor_name
-                        binding.lessonDescriptionTextView.text = mLesson.lesson_description
-                        if (DataRepository(context).getUserData().user_type == "student") {
+                        binding.lessonTitleTextView.text = mLesson.title
+                        binding.tutorNameTextView.text = mLesson.tutorName
+                        binding.lessonDescriptionTextView.text = mLesson.description
+                        if (DataRepository(context).getUserData().type == "student") {
                             binding.requestLessonButton.visibility = View.VISIBLE
                         }
+                    }
+                    LessonViewDataModel.SHOW_ERROR -> {
+                        showError(it.errorMessage.toString())
+                    }
+                    LessonViewDataModel.LESSON_REQUESTED -> {
+                        showLessonRequested()
                     }
                     else -> {}
                 }
@@ -86,7 +93,12 @@ class LessonFragment : Fragment(), IBaseView {
 
     }
 
-    override fun showError(errorId: Int?) {
+    override fun showError(errorMessage: String) {
+        val activity = activity as MainActivity
+        activity.createNotification(errorMessage)
+    }
 
+    private fun showLessonRequested() {
+        showError("Урок создан")
     }
 }

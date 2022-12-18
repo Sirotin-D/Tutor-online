@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.tutor_online.databinding.LessonItemBinding
 import com.example.tutor_online.datamodel.RequestLesson
+import com.example.tutor_online.utils.datastorage.MessageConverter
 import com.example.tutor_online.ui.fragment.OnItemClickListener
 
 class MyLessonListAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
@@ -39,8 +40,8 @@ class MyLessonListAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     inner class ItemViewHolder(private val binding: LessonItemBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(lessonItem: RequestLesson) {
-            binding.lessonTitleTextView.text = lessonItem.request_lesson_title
-            binding.lessonTutorName.text = lessonItem.request_lesson_tutor_name
+            binding.lessonTitleTextView.text = "Запрос на урок № ${lessonItem.requestId}"
+            binding.lessonTutorName.text = "Статус запроса: ${MessageConverter.getStringForRequestLessonStatus(lessonItem.status)}"
         }
     }
 }
