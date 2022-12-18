@@ -46,6 +46,11 @@ class MyProfileFragment: Fragment(), IBaseView {
         binding.userMailTextView.text = user.user_email
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
+    }
+
     override fun showLoading() {
 
     }

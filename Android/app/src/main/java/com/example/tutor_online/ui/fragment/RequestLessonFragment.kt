@@ -146,6 +146,11 @@ class RequestLessonFragment: Fragment(), IBaseView {
         }
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
+    }
+
     override fun showLoading() {
         binding.requestLessonProgressBar.visibility = View.VISIBLE
     }

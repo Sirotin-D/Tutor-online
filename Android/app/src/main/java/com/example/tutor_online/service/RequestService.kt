@@ -34,13 +34,17 @@ class RequestService {
 
     }
 
+    fun createLesson(tutorId: String, lessonTitle: String, lessonDescription: String, lessonContactData: String) {
+
+    }
+
     private fun getTestUser(): User {
         val testUserId = "1"
         val testUserName = "Тестовый пользователь"
         val testUserAge = "22"
         val testUserPhone = "+79101234567"
         val testUserEmail = "test_email@unn.ru"
-        val testUserType = "STUDENT"
+        val testUserType = "TUTOR"
         return User(testUserId, testUserName, testUserAge, testUserPhone, testUserEmail,  testUserType)
     }
 
