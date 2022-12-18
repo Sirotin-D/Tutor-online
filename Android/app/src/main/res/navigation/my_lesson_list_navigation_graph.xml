@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/my_lesson_list_navigation_graph"
+    app:startDestination="@id/my_lesson_list_fragment">
+
+    <fragment
+        android:id="@+id/my_lesson_list_fragment"
+        android:name="com.example.tutor_online.ui.fragment.MyLessonListFragment"
+        android:label="@string/my_lesson_list"
+        tools:layout="@layout/my_lesson_list_fragment" >
+        <action
+            android:id="@+id/action_lessonListFragment_to_request_lessonFragment"
+            app:destination="@id/requestLessonFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/requestLessonFragment"
+        android:name="com.example.tutor_online.ui.fragment.RequestLessonFragment"
+        android:label="@string/request_lesson"
+        tools:layout="@layout/request_lesson_fragment">
+        <argument
+            android:name="lesson_id"
+            android:defaultValue=""
+            app:argType="string"/>
+    </fragment>
+
+</navigation>
