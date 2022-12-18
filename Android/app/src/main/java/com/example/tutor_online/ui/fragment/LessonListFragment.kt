@@ -14,8 +14,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.tutor_online.R
 import com.example.tutor_online.databinding.LessonListFragmentBinding
 import com.example.tutor_online.datamodel.Lesson
+import com.example.tutor_online.datamodel.UserType
 import com.example.tutor_online.datamodel.viewDataModel.LessonListViewDataModel
 import com.example.tutor_online.ui.fragment.adapter.LessonListAdapter
+import com.example.tutor_online.utils.datastorage.DataRepository
 import com.example.tutor_online.viewmodel.LessonListViewModel
 
 class LessonListFragment: Fragment(), IBaseView, OnItemClickListener {
@@ -52,6 +54,10 @@ class LessonListFragment: Fragment(), IBaseView, OnItemClickListener {
         val mLayoutManager = LinearLayoutManager(context)
         binding.lessonListRecyclerView.layoutManager = mLayoutManager
         binding.lessonListRecyclerView.adapter = adapter
+        binding.createLessonButton.visibility = View.GONE
+        binding.createLessonButton.setOnClickListener {
+            createLessonButtonPressed()
+        }
         adapter.mItemClickListener = this
         return binding.root
     }
@@ -96,6 +102,9 @@ class LessonListFragment: Fragment(), IBaseView, OnItemClickListener {
         } else {
             adapter.setLessonList(list)
             binding.emptyLessonListTextView.visibility = View.GONE
+            if (DataRepository(context).getUserData().user_type == UserType.TUTOR.name) {
+                binding.createLessonButton.visibility = View.VISIBLE
+            }
         }
     }
 
@@ -129,5 +138,9 @@ class LessonListFragment: Fragment(), IBaseView, OnItemClickListener {
             bundle.putString("lesson_welcome_message", lessonWelcomeMessage)
             findNavController().navigate(R.id.lessonFragment, bundle)
         }
+    }
+
+    private fun createLessonButtonPressed() {
+        findNavController().navigate(R.id.createLessonFragment)
     }
 }

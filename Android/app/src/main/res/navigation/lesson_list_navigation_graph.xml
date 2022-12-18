@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_lessonListFragment_to_lessonFragment"
             app:destination="@id/lessonFragment" />
+        <action
+            android:id="@+id/action_lessonListFragment_to_createLessonFragment2"
+            app:destination="@id/createLessonFragment" />
     </fragment>
 
     <fragment
@@ -24,6 +27,13 @@
             android:name="lesson_id"
             android:defaultValue=""
             app:argType="string"/>
+    </fragment>
+
+    <fragment
+        android:id="@+id/createLessonFragment"
+        android:name="com.example.tutor_online.ui.fragment.CreateLessonFragment"
+        android:label="@string/create_lesson"
+        tools:layout="@layout/create_lesson_fragment">
     </fragment>
 
 </navigation>

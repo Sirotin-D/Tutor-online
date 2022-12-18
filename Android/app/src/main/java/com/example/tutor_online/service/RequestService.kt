@@ -34,13 +34,21 @@ class RequestService {
 
     }
 
+    fun createLesson(tutorId: String, lessonTitle: String, lessonDescription: String, lessonContactData: String) {
+
+    }
+
+    fun createAccount(name: String, age: String, phone: String, email: String, password: String, userType: String): User {
+        return getTestUser()
+    }
+
     private fun getTestUser(): User {
         val testUserId = "1"
         val testUserName = "Тестовый пользователь"
         val testUserAge = "22"
         val testUserPhone = "+79101234567"
         val testUserEmail = "test_email@unn.ru"
-        val testUserType = "student"
+        val testUserType = "TUTOR"
         return User(testUserId, testUserName, testUserAge, testUserPhone, testUserEmail,  testUserType)
     }
 
@@ -88,7 +96,7 @@ class RequestService {
             "4",
             "Для связи звонить на номер 4567",
             "1",
-            "pending"))
+            "PENDING"))
         testLessonsList.add(RequestLesson(
             "2",
             "2",
@@ -98,7 +106,7 @@ class RequestService {
             "4",
             "Для связи звонить на номер 4568",
             "1",
-            "accepted"))
+            "ACCEPTED"))
         testLessonsList.add(RequestLesson(
             "3",
             "3",
@@ -108,7 +116,7 @@ class RequestService {
             "4",
             "Для связи звонить на номер 4569",
             "1",
-            "cancelled"))
+            "CANCELLED"))
         return testLessonsList
     }
 }

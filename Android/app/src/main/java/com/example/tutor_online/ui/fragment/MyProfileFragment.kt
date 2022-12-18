@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.tutor_online.databinding.FragmentMyProfileBinding
+import com.example.tutor_online.datamodel.UserType
 import com.example.tutor_online.utils.datastorage.DataRepository
 import com.example.tutor_online.viewmodel.MyProfileViewModel
 
@@ -37,8 +38,17 @@ class MyProfileFragment: Fragment(), IBaseView {
         binding.userNameTextView.text = user.user_name
         binding.userAgeTextView.text = user.user_age
         binding.userPhoneTextView.text = user.user_phone
-        binding.userTypeTextView.text = user.user_type
+        binding.userTypeTextView.text = if (user.user_type == UserType.TUTOR.name) {
+            UserType.TUTOR.toString()
+        } else {
+            UserType.STUDENT.toString()
+        }
         binding.userMailTextView.text = user.user_email
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
     }
 
     override fun showLoading() {
