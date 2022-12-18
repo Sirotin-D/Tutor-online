@@ -3,10 +3,7 @@ package com.tutor.TutorSystem.controllers;
 import com.tutor.TutorSystem.models.Lesson;
 import com.tutor.TutorSystem.services.LessonService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -14,20 +11,30 @@ import java.util.List;
 @RequestMapping("/lesson")
 public class LessonController {
 
-    private final LessonService LessonService;
+    private final LessonService lessonService;
 
     @Autowired
-    public LessonController(LessonService LessonService) {
-        this.LessonService = LessonService;
+    public LessonController(LessonService vacancyService) {
+        this.lessonService = vacancyService;
     }
 
     @GetMapping()
-    public List<Lesson> getLessons(){
-        return LessonService.findAll(); // Jackson конвертирует в json
+    public List<Lesson> getVacancys(){
+        return lessonService.findAll(); // Jackson конвертирует в json
     }
 
     @GetMapping("/{id}")
-    public Lesson getLesson(@PathVariable("id")int id){
-        return  LessonService.findOne(id);
+    public Lesson getVacancy(@PathVariable("id")int id){
+        return  lessonService.findOne(id);
+    }
+
+    @PostMapping("/create")
+    public Lesson save(@RequestBody Lesson vacancy){
+        return lessonService.save(vacancy);
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public void delete(@RequestBody @PathVariable("id")int id){
+        lessonService.delete(id);
     }
 }
