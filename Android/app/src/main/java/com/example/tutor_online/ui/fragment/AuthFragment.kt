@@ -36,6 +36,7 @@ class AuthFragment: Fragment(), IBaseView {
 
         binding.authProgressBar.visibility = View.GONE
         binding.signInButton.setOnClickListener {
+            showLoading()
             val login = binding.authLoginEditText.text.toString()
             val password = binding.authPasswordEditText.text.toString()
             viewModel.handleClickingOnSignIn(login, password)
@@ -67,6 +68,7 @@ class AuthFragment: Fragment(), IBaseView {
                         showError(it.resourceId)
                     }
                     AuthViewDataModel.OPEN_MAIN_MENU -> {
+                        hideLoading()
                         val mainMenuIntent = Intent(context, MainActivity::class.java)
                         val user = it.user
                         if (user != null) {
