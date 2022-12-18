@@ -27,4 +27,16 @@
     <string name="create_lesson_title_hint">Название урока</string>
     <string name="create_lesson_description_hint">Описание урока</string>
     <string name="create_lesson_contact_data">Данные для связи</string>
+    <string name="register_button_text">Зарегистрироваться</string>
+    <string name="create_account">Создать аккаунт</string>
+    <string name="register">Регистрация</string>
+    <string name="register_title">Введите данные аккаунта</string>
+    <string name="register_name">Имя</string>
+    <string name="register_age">Возраст</string>
+    <string name="register_phone">Номер телефона</string>
+    <string name="register_email">Email</string>
+    <string name="tutor">Преподаватель</string>
+    <string name="student">Студент</string>
+    <string name="register_is_tutor_switch">Я преподаватель</string>
+    <string name="register_password">Пароль</string>
 </resources>

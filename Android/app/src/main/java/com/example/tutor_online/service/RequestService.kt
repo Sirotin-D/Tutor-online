@@ -38,6 +38,10 @@ class RequestService {
 
     }
 
+    fun createAccount(name: String, age: String, phone: String, email: String, password: String, userType: String): User {
+        return getTestUser()
+    }
+
     private fun getTestUser(): User {
         val testUserId = "1"
         val testUserName = "Тестовый пользователь"

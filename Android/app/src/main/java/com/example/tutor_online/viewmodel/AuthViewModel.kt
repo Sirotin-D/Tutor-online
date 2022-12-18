@@ -12,6 +12,7 @@ class AuthViewModel: ViewModel(), IBaseView {
     private val _authDisplayLiveData: MutableLiveData<AuthViewDataModel> = MutableLiveData()
     val authDisplayLiveData: LiveData<AuthViewDataModel> = _authDisplayLiveData
 
+    private val requestService = RequestService()
 
     override fun showLoading() {
         _authDisplayLiveData.postValue(AuthViewDataModel.SHOW_LOADING)
@@ -37,7 +38,7 @@ class AuthViewModel: ViewModel(), IBaseView {
             hideLoading()
             return
         }
-        val user = RequestService().auth(Pair(login, password))
+        val user = requestService.auth(Pair(login, password))
 
         val userState = AuthViewDataModel.OPEN_MAIN_MENU
         userState.user = user
