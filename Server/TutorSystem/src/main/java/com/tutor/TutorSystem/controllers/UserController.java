@@ -1,5 +1,7 @@
 package com.tutor.TutorSystem.controllers;
 
+import com.tutor.TutorSystem.POJOObjects.UserLoginCreater;
+import com.tutor.TutorSystem.models.LoginData;
 import com.tutor.TutorSystem.models.Request;
 import com.tutor.TutorSystem.models.User;
 import com.tutor.TutorSystem.services.RequestService;
@@ -51,9 +53,14 @@ public class UserController {
     }
 
     @PostMapping("/create")
-    public User create(@RequestBody User user)
+    public User create(@RequestBody UserLoginCreater userLoginCreater)
     {
-        return userService.save(user);
+        User user = new User(userLoginCreater.getId(),userLoginCreater.getName(),userLoginCreater.getAge(),userLoginCreater.getEmail(),
+                userLoginCreater.getType(),userLoginCreater.getPhone());
+        LoginData loginData = new LoginData(userLoginCreater.getEmail(),userLoginCreater.getPassword());
+        user = userService.save(user);
+        loginDataService.save(loginData);
+        return user;
     }
 
     @DeleteMapping("/delete/{id}")
