@@ -23,10 +23,6 @@
         android:name="com.example.tutor_online.ui.fragment.LessonFragment"
         android:label="@string/lesson"
         tools:layout="@layout/lesson_fragment">
-        <argument
-            android:name="lesson_id"
-            android:defaultValue=""
-            app:argType="string"/>
     </fragment>
 
     <fragment

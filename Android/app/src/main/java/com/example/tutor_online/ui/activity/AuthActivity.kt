@@ -2,6 +2,7 @@ package com.example.tutor_online.ui.activity
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupActionBarWithNavController
 import com.example.tutor_online.R
@@ -23,5 +24,9 @@ class AuthActivity : AppCompatActivity() {
     override fun onSupportNavigateUp(): Boolean {
         onBackPressed()
         return true
+    }
+
+    fun createNotification(text: String) {
+        Toast.makeText(applicationContext, text, Toast.LENGTH_LONG).show()
     }
 }

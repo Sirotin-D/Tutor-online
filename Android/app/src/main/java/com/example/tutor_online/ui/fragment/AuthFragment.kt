@@ -13,7 +13,8 @@ import com.example.tutor_online.R
 import com.example.tutor_online.databinding.FragmentAuthBinding
 import com.example.tutor_online.ui.activity.MainActivity
 import com.example.tutor_online.viewmodel.AuthViewModel
-import com.example.tutor_online.datamodel.viewDataModel.AuthViewDataModel
+import com.example.tutor_online.datamodel.viewdatamodel.AuthViewDataModel
+import com.example.tutor_online.ui.activity.AuthActivity
 import com.example.tutor_online.utils.datastorage.DataRepository
 
 class AuthFragment: Fragment(), IBaseView {
@@ -56,7 +57,6 @@ class AuthFragment: Fragment(), IBaseView {
                 when (it) {
                     AuthViewDataModel.INITIAL_STATE -> {
                         binding.authProgressBar.visibility = View.GONE
-                        binding.authErrorTextView.visibility = View.GONE
                     }
                     AuthViewDataModel.SHOW_LOADING -> {
                         showLoading()
@@ -65,7 +65,7 @@ class AuthFragment: Fragment(), IBaseView {
                         hideLoading()
                     }
                     AuthViewDataModel.SHOW_ERROR -> {
-                        showError(it.resourceId)
+                        showError(it.errorMessage.toString())
                     }
                     AuthViewDataModel.OPEN_MAIN_MENU -> {
                         hideLoading()
@@ -97,9 +97,10 @@ class AuthFragment: Fragment(), IBaseView {
         binding.authProgressBar.visibility = View.GONE
     }
 
-    override fun showError(errorId: Int?) {
+    override fun showError(errorMessage: String) {
         binding.authProgressBar.visibility = View.GONE
-        binding.authErrorTextView.text = "Ошибка"
+        val activity = activity as AuthActivity
+        activity.createNotification(errorMessage)
     }
 
     private fun registerButtonPressed() {

@@ -15,5 +15,10 @@ enum class RequestLessonStatus {
         override fun toString(): String {
             return "Ожидает подтверждения преподавателем"
         }
+    },
+    DELETED {
+        override fun toString(): String {
+            return "Удалено преподавателем"
+        }
     }
 }

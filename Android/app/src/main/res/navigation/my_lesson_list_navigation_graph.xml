@@ -20,10 +20,6 @@
         android:name="com.example.tutor_online.ui.fragment.RequestLessonFragment"
         android:label="@string/request_lesson"
         tools:layout="@layout/request_lesson_fragment">
-        <argument
-            android:name="lesson_id"
-            android:defaultValue=""
-            app:argType="string"/>
     </fragment>
 
 </navigation>

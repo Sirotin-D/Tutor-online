@@ -15,7 +15,9 @@ import com.example.tutor_online.R
 import com.example.tutor_online.databinding.LessonListFragmentBinding
 import com.example.tutor_online.datamodel.Lesson
 import com.example.tutor_online.datamodel.UserType
-import com.example.tutor_online.datamodel.viewDataModel.LessonListViewDataModel
+import com.example.tutor_online.datamodel.viewdatamodel.LessonListViewDataModel
+import com.example.tutor_online.ui.activity.AuthActivity
+import com.example.tutor_online.ui.activity.MainActivity
 import com.example.tutor_online.ui.fragment.adapter.LessonListAdapter
 import com.example.tutor_online.utils.datastorage.DataRepository
 import com.example.tutor_online.viewmodel.LessonListViewModel
@@ -77,10 +79,10 @@ class LessonListFragment: Fragment(), IBaseView, OnItemClickListener {
                         hideLoading()
                     }
                     LessonListViewDataModel.SHOW_ERROR -> {
-                       showError(it.resourceId)
+                       showError(it.errorMessage.toString())
                     }
                     LessonListViewDataModel.OPEN_LESSON -> {
-
+                        findNavController().navigate(R.id.createLessonFragment)
                     }
                     else -> {}
                 }
@@ -102,7 +104,7 @@ class LessonListFragment: Fragment(), IBaseView, OnItemClickListener {
         } else {
             adapter.setLessonList(list)
             binding.emptyLessonListTextView.visibility = View.GONE
-            if (DataRepository(context).getUserData().user_type == UserType.TUTOR.name) {
+            if (DataRepository(context).getUserData().type == UserType.TUTOR.name) {
                 binding.createLessonButton.visibility = View.VISIBLE
             }
         }
@@ -116,25 +118,27 @@ class LessonListFragment: Fragment(), IBaseView, OnItemClickListener {
         binding.lessonListProgressBar.visibility = View.GONE
     }
 
-    override fun showError(errorId: Int?) {
-
+    override fun showError(errorMessage: String) {
+        binding.lessonListProgressBar.visibility = View.GONE
+        val activity = activity as MainActivity
+        activity.createNotification(errorMessage)
     }
 
     override fun onItemClick(position: Int) {
         val currentLesson = viewModel.lessonsListLiveData.value?.get(position)
         if (currentLesson != null) {
-            val lessonId = currentLesson.lesson_id
-            val lessonTitle = currentLesson.lesson_title
-            val lessonDescription = currentLesson.lesson_description
-            val lessonTutorName = currentLesson.lesson_tutor_name
-            val lessonTutorId = currentLesson.lesson_tutor_id
-            val lessonWelcomeMessage = currentLesson.lesson_welcome_message
+            val lessonId = currentLesson.lessonId
+            val lessonTitle = currentLesson.title
+            val lessonDescription = currentLesson.description
+            val lessonTutorName = currentLesson.tutorName
+            val lessonTutorId = currentLesson.tutorId
+            val lessonWelcomeMessage = currentLesson.welcomeMessage
             val bundle = Bundle()
-            bundle.putString("lesson_id", lessonId)
+            bundle.putInt("lesson_id", lessonId)
             bundle.putString("lesson_title", lessonTitle)
             bundle.putString("lesson_description", lessonDescription)
             bundle.putString("lesson_tutor_name", lessonTutorName)
-            bundle.putString("lesson_tutor_id", lessonTutorId)
+            bundle.putInt("lesson_tutor_id", lessonTutorId)
             bundle.putString("lesson_welcome_message", lessonWelcomeMessage)
             findNavController().navigate(R.id.lessonFragment, bundle)
         }

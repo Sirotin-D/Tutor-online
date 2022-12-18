@@ -14,8 +14,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.tutor_online.R
 import com.example.tutor_online.databinding.MyLessonListFragmentBinding
 import com.example.tutor_online.datamodel.RequestLesson
-import com.example.tutor_online.datamodel.viewDataModel.LessonListViewDataModel
+import com.example.tutor_online.datamodel.viewdatamodel.LessonListViewDataModel
+import com.example.tutor_online.ui.activity.MainActivity
 import com.example.tutor_online.ui.fragment.adapter.MyLessonListAdapter
+import com.example.tutor_online.utils.datastorage.DataRepository
 import com.example.tutor_online.viewmodel.MyLessonListViewModel
 
 class MyLessonListFragment: Fragment(), IBaseView, OnItemClickListener {
@@ -60,6 +62,7 @@ class MyLessonListFragment: Fragment(), IBaseView, OnItemClickListener {
         super.onViewCreated(view, savedInstanceState)
         viewModel.apply {
             myLessonsListLiveData.observe(viewLifecycleOwner) {
+                hideLoading()
                 onLessonsListChanged(it)
             }
             myLessonsListStateLiveData.observe(viewLifecycleOwner) {
@@ -71,7 +74,8 @@ class MyLessonListFragment: Fragment(), IBaseView, OnItemClickListener {
                         hideLoading()
                     }
                     LessonListViewDataModel.SHOW_ERROR -> {
-                        showError(it.resourceId)
+                        hideLoading()
+                        showError(it.errorMessage.toString())
                     }
                     LessonListViewDataModel.OPEN_LESSON -> {
 
@@ -79,7 +83,7 @@ class MyLessonListFragment: Fragment(), IBaseView, OnItemClickListener {
                     else -> {}
                 }
             }
-            viewOpened()
+            viewOpened(DataRepository(context).getUserData().id)
         }
     }
 
@@ -107,31 +111,26 @@ class MyLessonListFragment: Fragment(), IBaseView, OnItemClickListener {
         binding.myLessonListProgressBar.visibility = View.GONE
     }
 
-    override fun showError(errorId: Int?) {
-
+    override fun showError(errorMessage: String) {
+        val activity = activity as MainActivity
+        activity.createNotification(errorMessage)
     }
 
     override fun onItemClick(position: Int) {
         val currentLesson = viewModel.myLessonsListLiveData.value?.get(position)
         if (currentLesson != null) {
-            val requestId = currentLesson.request_id
-            val requestLessonId = currentLesson.request_lesson_id
-            val lessonTitle = currentLesson.request_lesson_title
-            val lessonDescription = currentLesson.request_lesson_description
-            val lessonTutorName = currentLesson.request_lesson_tutor_name
-            val lessonTutorId = currentLesson.request_tutor_id
-            val lessonWelcomeMessage = currentLesson.request_welcome_message
-            val requestStudentId = currentLesson.request_student_id
-            val requestStatus = currentLesson.request_status
+            val requestId = currentLesson.requestId
+            val requestLessonId = currentLesson.lessonId
+            val lessonTutorId = currentLesson.tutorId
+            val lessonWelcomeMessage = currentLesson.welcomeMessage
+            val requestStudentId = currentLesson.studentId
+            val requestStatus = currentLesson.status
             val bundle = Bundle()
-            bundle.putString("request_id", requestId)
-            bundle.putString("request_lesson_id", requestLessonId)
-            bundle.putString("request_lesson_title", lessonTitle)
-            bundle.putString("request_lesson_description", lessonDescription)
-            bundle.putString("request_lesson_tutor_name", lessonTutorName)
-            bundle.putString("request_tutor_id", lessonTutorId)
+            bundle.putInt("request_id", requestId)
+            bundle.putInt("request_lesson_id", requestLessonId)
+            bundle.putInt("request_tutor_id", lessonTutorId)
             bundle.putString("request_welcome_message", lessonWelcomeMessage)
-            bundle.putString("request_student_id", requestStudentId)
+            bundle.putInt("request_student_id", requestStudentId)
             bundle.putString("request_status", requestStatus)
             findNavController().navigate(R.id.requestLessonFragment, bundle)
         }
