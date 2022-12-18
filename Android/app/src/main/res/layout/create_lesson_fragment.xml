@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.fragment.CreateLessonFragment">
+
+    <TextView
+        android:id="@+id/create_lesson_title_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/enter_lesson_data_title"
+        android:textSize="20sp"
+        android:layout_marginTop="50dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="10dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:padding="10dp"
+        app:layout_constraintTop_toBottomOf="@+id/create_lesson_title_text_view">
+
+        <EditText
+            android:id="@+id/lesson_title_edit_text"
+            android:hint="@string/create_lesson_title_hint"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="19dp"
+            android:textSize="20sp" />
+
+        <EditText
+            android:id="@+id/lesson_description_edit_text"
+            android:hint="@string/create_lesson_description_hint"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="5dp"
+            android:textSize="20sp"
+            android:layout_below="@+id/lesson_title_edit_text"/>
+
+        <EditText
+            android:id="@+id/lesson_contact_data_edit_text"
+            android:hint="@string/create_lesson_contact_data"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="5dp"
+            android:textSize="20sp"
+            android:layout_below="@id/lesson_description_edit_text" />
+
+        <Button
+            android:id="@+id/accept_create_button_lesson"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:text="@string/create_lesson_button_text"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="15dp"
+            android:layout_below="@id/lesson_contact_data_edit_text"/>
+
+    </RelativeLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

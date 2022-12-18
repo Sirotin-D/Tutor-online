@@ -8,6 +8,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
+import com.example.tutor_online.R
 import com.example.tutor_online.databinding.FragmentAuthBinding
 import com.example.tutor_online.ui.activity.MainActivity
 import com.example.tutor_online.viewmodel.AuthViewModel
@@ -34,9 +36,14 @@ class AuthFragment: Fragment(), IBaseView {
 
         binding.authProgressBar.visibility = View.GONE
         binding.signInButton.setOnClickListener {
+            showLoading()
             val login = binding.authLoginEditText.text.toString()
             val password = binding.authPasswordEditText.text.toString()
             viewModel.handleClickingOnSignIn(login, password)
+        }
+
+        binding.registerButton.setOnClickListener {
+            registerButtonPressed()
         }
 
         return binding.root
@@ -61,6 +68,7 @@ class AuthFragment: Fragment(), IBaseView {
                         showError(it.resourceId)
                     }
                     AuthViewDataModel.OPEN_MAIN_MENU -> {
+                        hideLoading()
                         val mainMenuIntent = Intent(context, MainActivity::class.java)
                         val user = it.user
                         if (user != null) {
@@ -92,5 +100,9 @@ class AuthFragment: Fragment(), IBaseView {
     override fun showError(errorId: Int?) {
         binding.authProgressBar.visibility = View.GONE
         binding.authErrorTextView.text = "Ошибка"
+    }
+
+    private fun registerButtonPressed() {
+        findNavController().navigate(R.id.registerFragment)
     }
 }

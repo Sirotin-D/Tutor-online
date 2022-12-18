@@ -1,5 +1,6 @@
 package com.tutor.TutorSystem.controllers;
 
+
 import com.tutor.TutorSystem.POJOObjects.UserLoginCreater;
 import com.tutor.TutorSystem.models.LoginData;
 import com.tutor.TutorSystem.models.Request;
@@ -61,6 +62,7 @@ public class UserController {
         user = userService.save(user);
         loginDataService.save(loginData);
         return user;
+
     }
 
     @DeleteMapping("/delete/{id}")
