@@ -21,4 +21,6 @@
     <string name="cancel_lesson">Отменить урок</string>
     <string name="accept_lesson">Принять урок</string>
     <string name="delete_lesson_button_text">Удалить урок</string>
+    <string name="student_text">Студент</string>
+    <string name="tutor_text">Преподаватель</string>
 </resources>
