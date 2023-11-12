@@ -93,8 +93,8 @@ class RequestService {
         })
     }
 
-    fun updateRequestLessonStatus(requestId: Int, status: RequestLessonStatus, responseCallback: UpdateRequestLessonStatusResponseCallback) {
-        val updateStatusRequestLesson = UpdateStatusRequestLesson(requestId, status.name)
+    fun updateRequestLessonStatus(requestId: Int, status: String, responseCallback: UpdateRequestLessonStatusResponseCallback) {
+        val updateStatusRequestLesson = UpdateStatusRequestLesson(requestId, status)
         retrofitService.updateRequestLessonStatus(updateStatusRequestLesson).enqueue(object : Callback<ResponseBody> {
             override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
                 responseCallback.onSuccess()
@@ -107,8 +107,8 @@ class RequestService {
         })
     }
 
-    fun createAccount(name: String, age: Int, phone: String, email: String, password: String, userType: UserType, responceCallback: CreateAccountResponseCallback) {
-        val userRegister = UserRegister(name, age, phone, email, userType.name, password)
+    fun createAccount(name: String, age: Int, phone: String, email: String, password: String, userType: String, responceCallback: CreateAccountResponseCallback) {
+        val userRegister = UserRegister(name, age, phone, email, userType, password)
         retrofitService.createAccount(userRegister).enqueue(object : Callback<User> {
             override fun onResponse(call: Call<User>, response: Response<User>) {
                 responceCallback.onSuccess(response)

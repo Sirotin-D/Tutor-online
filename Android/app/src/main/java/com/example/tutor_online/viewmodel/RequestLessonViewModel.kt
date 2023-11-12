@@ -42,7 +42,7 @@ class RequestLessonViewModel: ViewModel() {
     }
 
     fun handleCancelButtonClick(requestLessonId: Int) {
-        requestService.updateRequestLessonStatus(requestLessonId, RequestLessonStatus.CANCELLED, object :
+        requestService.updateRequestLessonStatus(requestLessonId, RequestLessonStatus.CANCELLED.name, object :
             UpdateRequestLessonStatusResponseCallback {
             override fun onSuccess() {
                 _requestLessonStateLiveData.postValue(RequestLessonViewDataModel.SHOW_LESSON_AFTER_BUTTON_PRESSED)
@@ -59,7 +59,7 @@ class RequestLessonViewModel: ViewModel() {
 
     fun handleAcceptButtonClick(requestLessonId: Int) {
         _requestLessonStateLiveData.postValue(RequestLessonViewDataModel.SHOW_LESSON_AFTER_BUTTON_PRESSED)
-        requestService.updateRequestLessonStatus(requestLessonId, RequestLessonStatus.ACCEPTED, object :
+        requestService.updateRequestLessonStatus(requestLessonId, RequestLessonStatus.ACCEPTED.name, object :
             UpdateRequestLessonStatusResponseCallback {
             override fun onSuccess() {
                 _requestLessonStateLiveData.postValue(RequestLessonViewDataModel.SHOW_LESSON_AFTER_BUTTON_PRESSED)
@@ -76,7 +76,7 @@ class RequestLessonViewModel: ViewModel() {
 
     fun handleDeleteButtonClick(requestLessonId: Int) {
         _requestLessonStateLiveData.postValue(RequestLessonViewDataModel.SHOW_LESSON_AFTER_BUTTON_PRESSED)
-        requestService.updateRequestLessonStatus(requestLessonId, RequestLessonStatus.DELETED, object :
+        requestService.updateRequestLessonStatus(requestLessonId, RequestLessonStatus.DELETED.name, object :
             UpdateRequestLessonStatusResponseCallback {
             override fun onSuccess() {
                 _requestLessonStateLiveData.postValue(RequestLessonViewDataModel.SHOW_LESSON_AFTER_BUTTON_PRESSED)

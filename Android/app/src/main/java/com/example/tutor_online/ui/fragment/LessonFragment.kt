@@ -63,7 +63,7 @@ class LessonFragment : Fragment(), IBaseView {
                         binding.lessonTitleTextView.text = mLesson.title
                         binding.tutorNameTextView.text = mLesson.tutorName
                         binding.lessonDescriptionTextView.text = mLesson.description
-                        if (DataRepository(context).getUserData().type == "student") {
+                        if (DataRepository(context).getUserData().type == "STUDENT") {
                             binding.requestLessonButton.visibility = View.VISIBLE
                         }
                     }
@@ -99,6 +99,6 @@ class LessonFragment : Fragment(), IBaseView {
     }
 
     private fun showLessonRequested() {
-        showError("Урок создан")
+        showError("Урок успешно создан")
     }
 }

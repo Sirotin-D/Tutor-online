@@ -24,9 +24,9 @@ class RegisterViewModel: ViewModel() {
     fun registerButtonPressed(name: String, age: Int, phone: String, email: String, password: String, isTutor: Boolean) {
         if ((name != "") && (phone != "") && (email != "") && (password != "")) {
             val userType = if (isTutor) {
-                UserType.TUTOR
+                UserType.TUTOR.name
             } else {
-                UserType.STUDENT
+                UserType.STUDENT.name
             }
             requestService.createAccount(name, age, phone, email, password, userType, object :
                 CreateAccountResponseCallback {
@@ -43,9 +43,15 @@ class RegisterViewModel: ViewModel() {
                 }
 
                 override fun onFailure(throwable: Throwable) {
-                    Log.d("RegisterViewModel", "ERROR auth: $throwable")
+                    val showError = RegisterViewDataModel.SHOW_ERROR
+                    showError.errorMessage = throwable.message
+                    _registerStateLiveData.postValue(showError)
                 }
             })
+        } else {
+            val showError = RegisterViewDataModel.SHOW_ERROR
+            showError.errorMessage = "Заполните все поля"
+            _registerStateLiveData.postValue(showError)
         }
     }
 }

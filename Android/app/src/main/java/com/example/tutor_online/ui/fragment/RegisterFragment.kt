@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.tutor_online.databinding.RegisterFragmentBinding
 import com.example.tutor_online.datamodel.viewdatamodel.RegisterViewDataModel
+import com.example.tutor_online.ui.activity.AuthActivity
 import com.example.tutor_online.ui.activity.MainActivity
 import com.example.tutor_online.utils.datastorage.DataRepository
 import com.example.tutor_online.viewmodel.RegisterViewModel
@@ -85,6 +86,7 @@ class RegisterFragment: Fragment(), IBaseView {
     }
 
     override fun showError(errorMessage: String) {
-
+        val activity = activity as AuthActivity
+        activity.createNotification(errorMessage)
     }
 }
